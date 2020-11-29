@@ -12,12 +12,27 @@ public class player_control : MonoBehaviour
     private float player_max_jump_height = 10.0f;
     private float player_jump_power = 1.0f;
 
+    public static bool in_car = false;
+
     public Camera mainCamera, noiseCamera;
+
+    public static bool[] getMemo;
+
+    public GameObject carKey;
+
+    public static bool isCarKey = false;
+    public static bool isHellKey = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        getMemo = new bool[5];
+        for(int i=0; i<getMemo.Length; i++)
+        {
+            getMemo[i] = false;
+        }
+
+        carKey.SetActive(false);
     }
 
     // Update is called once per frame
@@ -52,6 +67,11 @@ public class player_control : MonoBehaviour
         else
         {
             showMainCamera();
+        }
+
+        if (getMemo[0] && getMemo[1] && getMemo[2] && getMemo[3] && getMemo[4])
+        {
+            carKey.SetActive(true);
         }
     }
 

@@ -5,7 +5,7 @@ using UnityEngine;
 public class smooth_follow : MonoBehaviour
 {
     public Transform target;
-    float distance =1.0f;
+    float distance = 1.0f;
     float height = 0.0f;
     float heightDamping = 2.0f;
     float rotationDamping = 3.0f;
@@ -20,8 +20,10 @@ public class smooth_follow : MonoBehaviour
         float currentRotationAngle = this.transform.eulerAngles.y;
         float currentHeight = this.transform.position.y;
 
+
         currentRotationAngle = Mathf.LerpAngle(currentRotationAngle, wantedRotationAngle, rotationDamping * Time.deltaTime);
         currentHeight = Mathf.Lerp(currentHeight, wantedHeight, heightDamping * Time.deltaTime);
+
 
         Quaternion currentRotation = Quaternion.Euler(0, currentRotationAngle, 0);
 
