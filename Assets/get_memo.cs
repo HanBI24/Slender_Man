@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,15 +12,38 @@ public class get_memo : MonoBehaviour
 
     public Camera mainCamera;
     public Camera endingCamera;
+    public Camera hellCamera;
 
     private AudioSource audio_source;
     public AudioClip hellSound;
 
     public GameObject hellgi;
 
+    bool[] isGet;
+
+    public GameObject[] getMemo;
+    public GameObject getCarKey;
+    public GameObject getHellKey;
+
+    bool isMemo5 = false;
+    bool isCarKey = false;
+    bool isHellKye = false;
+
     void Start()
     {
+        isGet = new bool[7];
+        hellCamera.enabled = false;
+        for(int i=0; i<getMemo.Length; i++)
+        {
+            getMemo[i].gameObject.SetActive(false);
+        }
 
+        for(int i=0; i<7; i++)
+        {
+            isGet[i] = false;
+        }
+        getCarKey.gameObject.SetActive(false);
+        getHellKey.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -42,36 +66,52 @@ public class get_memo : MonoBehaviour
                     {
                         player_control.getMemo[0] = true;
                         Destroy(memo[0]);
+                        isGet[0] = true;
                     }
                     if (hit.transform.gameObject.name == "memo2")
                     {
                         player_control.getMemo[1] = true;
                         Destroy(memo[1]);
+                        isGet[1] = true;
                     }
                     if (hit.transform.gameObject.name == "memo3")
                     {
                         player_control.getMemo[2] = true;
                         Destroy(memo[2]);
+                        isGet[2] = true;
                     }
                     if (hit.transform.gameObject.name == "memo4")
                     {
                         player_control.getMemo[3] = true;
                         Destroy(memo[3]);
+                        isGet[3] = true;
                     }
                     if (hit.transform.gameObject.name == "memo5")
                     {
                         player_control.getMemo[4] = true;
                         Destroy(memo[4]);
+                        isGet[4] = true;
                     }
                     if(hit.transform.gameObject.name == "car_key")
                     {
                         player_control.isCarKey = true;
                         Destroy(carKey);
+                        isGet[5] = true;
                     }
                     if(hit.transform.gameObject.name == "hell_key")
                     {
+                        isGet[6] = true;
                         player_control.isHellKey = true;
+                        player_control.isFindHellKey = true;
+                        Destroy(hellKey);
+                    }
+                    if(hit.transform.gameObject.name == "Hell" && player_control.isHellKey)
+                    {
+                        Debug.Log("Ending");
+                        player_control.isInHell = true;
+                        hellCamera.enabled = true;
 
+                        player_control.isInHell = true;
 
                         SceneManager.LoadScene("ending_scene", LoadSceneMode.Additive);
                         mainCamera.gameObject.SetActive(false);
@@ -81,18 +121,96 @@ public class get_memo : MonoBehaviour
                         audio_source.clip = hellSound;
                         audio_source.loop = true;
                         audio_source.Play();
-
-
-                        Destroy(hellKey);
-                    }
-                    if(hit.transform.gameObject.name == "Hell" && player_control.isHellKey)
-                    {
-                        Debug.Log("Ending");
-                        //SceneManager.LoadScene("ending_scene");
                     }
                 }
             }
         }
+
+        if(player_control.getMemo[0] == true && isGet[0])
+        {
+            getMemo[0].gameObject.SetActive(true);
+            isGet[0] = false;
+            Invoke("isGetMemo", 3.0f);
+        }
+        else if (player_control.getMemo[1] == true && isGet[1])
+        { 
+            getMemo[1].gameObject.SetActive(true);
+            isGet[1] = false;
+            Invoke("isGetMemo", 3.0f);
+        }
+        else if (player_control.getMemo[2] == true && isGet[2])
+        {
+            getMemo[2].gameObject.SetActive(true);
+            isGet[2] = false;
+            Invoke("isGetMemo", 3.0f);
+        }
+        else if (player_control.getMemo[3] == true && isGet[3])
+        {
+            getMemo[3].gameObject.SetActive(true);
+            isGet[3] = false;
+            Invoke("isGetMemo", 3.0f);
+        }
+        else if (player_control.getMemo[4] == true && isGet[4])
+        {
+            getMemo[4].gameObject.SetActive(true);
+            isGet[4] = false;
+            isMemo5 = true;
+            Invoke("isGetMemo", 3.0f);
+        }
+        else if (player_control.isCarKey == true && isGet[5])
+        {
+            getCarKey.gameObject.SetActive(true);
+            isGet[5] = false;
+            isCarKey = true;
+            Invoke("isGetMemo", 3.0f);
+        }
+        else if (player_control.isHellKey == true && isGet[6])
+        {
+            getHellKey.gameObject.SetActive(true);
+            isGet[6] = false;
+            isHellKye = true;
+            Invoke("isGetMemo", 3.0f);
+        }
+    }
+
+    void isGetMemo()
+    {
+        player_control.isGetMemo1 = true;
+        getMemo[0].gameObject.SetActive(false);
+        getMemo[1].gameObject.SetActive(false);
+        getMemo[2].gameObject.SetActive(false);
+        getMemo[3].gameObject.SetActive(false);
+        getMemo[4].gameObject.SetActive(false);
+        getCarKey.gameObject.SetActive(false);
+        getHellKey.gameObject.SetActive(false);
+
+        if (isMemo5)
+        {
+            Invoke("isGetMemoSuccess2", 1.0f);
+        }
+        if (isCarKey)
+        {
+            Invoke("isFindCarKey", 1.0f);
+        }
+        if (isHellKye)
+        {
+            Invoke("isFindHellKey", 1.0f);
+        }
+    }
+
+    void isGetMemoSuccess2()
+    {
+        player_control.isSuccessGetMemo2 = true;
+    }
+
+    void isFindCarKey()
+    {
+        player_control.isFindCarKey = true;
+    }
+
+    void isFindHellKey()
+    {
+        player_control.isFindHellKey = true;
     }
 
 }

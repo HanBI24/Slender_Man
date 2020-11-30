@@ -22,6 +22,8 @@ public class get_car : MonoBehaviour
     {
         if (player_control.in_car && Input.GetKeyDown("i") && player_control.isCarKey)
         {
+            player_control.isInCar = true;
+            player_control.isOutCar = false;
             if (crash_door.hit_car)
             {
                 player_control.isCarKey = false;
@@ -40,6 +42,7 @@ public class get_car : MonoBehaviour
         if (player_control.in_car == false && Input.GetKeyDown("o"))
         {
             Debug.Log("Out car");
+            player_control.isOutCar = true;
             carControlScript.GetComponent<UnityStandardAssets.Vehicles.Car.CarUserControl>().enabled = false;
             playerControlScript.GetComponent<player_control>().enabled = true;
             player_camera.gameObject.SetActive(true);

@@ -30,6 +30,7 @@ public class crash_door : MonoBehaviour
             playerControlScript.GetComponent<player_control>().enabled = true;
             hit_car = true;
             hellKey.SetActive(true);
+            player_control.carCrash = true;
         }
     }
 }
