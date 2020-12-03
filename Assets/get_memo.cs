@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 
 public class get_memo : MonoBehaviour
@@ -29,9 +30,20 @@ public class get_memo : MonoBehaviour
     bool isCarKey = false;
     bool isHellKye = false;
 
+    public GameObject leftLight, rightLight;
+
+    public GameObject slenderControl;
+    public GameObject hellControl;
+    public GameObject hellControlCamera;
+    public GameObject leftLightControl, rightLightControl;
+
+    public static bool[] isGetMemoSpeed;
+
+
     void Start()
     {
         isGet = new bool[7];
+        isGetMemoSpeed = new bool[4];
         hellCamera.enabled = false;
         for(int i=0; i<getMemo.Length; i++)
         {
@@ -42,13 +54,26 @@ public class get_memo : MonoBehaviour
         {
             isGet[i] = false;
         }
+
+        for(int i=0; i<isGetMemoSpeed.Length; i++)
+        {
+            isGetMemoSpeed[i] = false;
+        }
         getCarKey.gameObject.SetActive(false);
         getHellKey.gameObject.SetActive(false);
+        leftLight.gameObject.SetActive(false);
+        rightLight.gameObject.SetActive(false);
+        slenderControl.GetComponent<slender_control>().enabled = false;
+        hellControl.GetComponent<hell_control>().enabled = false;
+        hellControlCamera.GetComponent<hell_control>().enabled = false;
+        leftLightControl.GetComponent<hell_control>().enabled = false;
+        rightLightControl.GetComponent<hell_control>().enabled = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+
         if (Input.GetMouseButtonDown(0))
         {
             RaycastHit hit;
@@ -67,30 +92,36 @@ public class get_memo : MonoBehaviour
                         player_control.getMemo[0] = true;
                         Destroy(memo[0]);
                         isGet[0] = true;
+                        slenderControl.GetComponent<slender_control>().enabled = true;
+
                     }
                     if (hit.transform.gameObject.name == "memo2")
                     {
                         player_control.getMemo[1] = true;
                         Destroy(memo[1]);
                         isGet[1] = true;
+                        isGetMemoSpeed[0] = true;
                     }
                     if (hit.transform.gameObject.name == "memo3")
                     {
                         player_control.getMemo[2] = true;
                         Destroy(memo[2]);
                         isGet[2] = true;
+                        isGetMemoSpeed[1] = true;
                     }
                     if (hit.transform.gameObject.name == "memo4")
                     {
                         player_control.getMemo[3] = true;
                         Destroy(memo[3]);
                         isGet[3] = true;
+                        isGetMemoSpeed[2] = true;
                     }
                     if (hit.transform.gameObject.name == "memo5")
                     {
                         player_control.getMemo[4] = true;
                         Destroy(memo[4]);
                         isGet[4] = true;
+                        isGetMemoSpeed[3] = true;
                     }
                     if(hit.transform.gameObject.name == "car_key")
                     {
@@ -105,9 +136,18 @@ public class get_memo : MonoBehaviour
                         player_control.isFindHellKey = true;
                         Destroy(hellKey);
                     }
-                    if(hit.transform.gameObject.name == "Hell" && player_control.isHellKey)
+                    if(hit.transform.gameObject.name == "Hell" && player_control.isHellKey && Input_Hellgi.isInputHellgi)
                     {
                         Debug.Log("Ending");
+
+                        hellControl.GetComponent<hell_control>().enabled = true;
+                        hellControlCamera.GetComponent<hell_control>().enabled = true;
+                        leftLightControl.GetComponent<hell_control>().enabled = true;
+                        rightLightControl.GetComponent<hell_control>().enabled = true;
+
+                        leftLight.gameObject.SetActive(true);
+                        rightLight.gameObject.SetActive(true);
+
                         player_control.isInHell = true;
                         hellCamera.enabled = true;
 

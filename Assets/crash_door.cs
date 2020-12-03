@@ -9,10 +9,16 @@ public class crash_door : MonoBehaviour
     public static bool hit_car = false;
     public GameObject hellKey;
 
+    private AudioSource audioSource;
+    public AudioClip appear_sound;
+
     // Start is called before the first frame update
     void Start()
     {
         hellKey.SetActive(false);
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.clip = appear_sound;
+        audioSource.loop = false;
     }
 
     // Update is called once per frame
@@ -31,6 +37,7 @@ public class crash_door : MonoBehaviour
             hit_car = true;
             hellKey.SetActive(true);
             player_control.carCrash = true;
+            audioSource.Play();
         }
     }
 }

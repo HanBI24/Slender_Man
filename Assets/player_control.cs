@@ -37,6 +37,9 @@ public class player_control : MonoBehaviour
     public static bool isFindHellKey = false;
     public static bool isInHell = false;
 
+    public static bool isInCarSpeak = false;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -109,16 +112,6 @@ public class player_control : MonoBehaviour
         if (Input.GetKeyUp("space"))
         {
             this.GetComponent<Rigidbody>().AddForce(Vector3.up*player_jump_height, ForceMode.Impulse);
-        }
-
-        if(cube_collider.see_slender == true)
-        {
-            showNoiseCamera();
-            cube_collider.see_slender = false;
-        }
-        else
-        {
-            showMainCamera();
         }
 
         if (getMemo[0] && getMemo[1] && getMemo[2] && getMemo[3] && getMemo[4])
@@ -202,6 +195,7 @@ public class player_control : MonoBehaviour
         else if (isSpeaking[11] && isInCar)
         {
             speak[11].SetActive(true);
+            isInCarSpeak = true;
             isSpeaking[11] = false;
             Invoke("Speak12", 3.0f);
         }
@@ -253,6 +247,20 @@ public class player_control : MonoBehaviour
             isSpeaking[19] = false;
             Invoke("Speak20", 10.0f);
         }
+
+        // 만약 노이즈 화면과 게임화면의 출력이 정상적으로 전환되지 않고
+        // 노이즈 화면만 지속적으로 보일 때
+        // 여기부터
+        if (cube_collider.see_slender == true)
+        {
+            showNoiseCamera();
+            cube_collider.see_slender = false;
+        }
+        else
+        {
+            showMainCamera();
+        }
+        // 여기까지 주석처리하면 됩니다. (노이즈 화면 제거)
 
     }
 

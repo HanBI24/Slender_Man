@@ -10,11 +10,13 @@ public class get_car : MonoBehaviour
     public Camera car_camera;
 
     public GameObject player;
+    public GameObject leftLight, rightLight;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        leftLight.gameObject.SetActive(false);
+        rightLight.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -24,6 +26,8 @@ public class get_car : MonoBehaviour
         {
             player_control.isInCar = true;
             player_control.isOutCar = false;
+            leftLight.gameObject.SetActive(true);
+            rightLight.gameObject.SetActive(true);
             if (crash_door.hit_car)
             {
                 player_control.isCarKey = false;

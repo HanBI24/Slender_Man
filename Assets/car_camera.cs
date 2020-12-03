@@ -10,6 +10,12 @@ public class car_camera : MonoBehaviour
     float heightDamping = 2.0f;
     float rotationDamping = 3.0f;
 
+    public GameObject speaking;
+
+    void Start()
+    {
+        speaking.SetActive(false);
+    }
     // Update is called once per frame
     void LateUpdate()
     {
@@ -33,5 +39,14 @@ public class car_camera : MonoBehaviour
         this.transform.position = temp_position;
 
         this.transform.LookAt(target);
+    }
+
+    void Update()
+    {
+        if (player_control.isInCarSpeak)
+        {
+            speaking.SetActive(true);
+        }
+
     }
 }
