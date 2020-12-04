@@ -39,6 +39,10 @@ public class player_control : MonoBehaviour
 
     public static bool isInCarSpeak = false;
 
+    int jumpCnt = 0;
+    float jumpTime = 0.0f;
+    bool isJump = false;
+
 
     // Start is called before the first frame update
     void Start()
@@ -111,7 +115,11 @@ public class player_control : MonoBehaviour
 
         if (Input.GetKeyUp("space"))
         {
-            this.GetComponent<Rigidbody>().AddForce(Vector3.up*player_jump_height, ForceMode.Impulse);
+            if (!isJump)
+            {
+                isJump = true;
+                this.GetComponent<Rigidbody>().AddForce(Vector3.up * player_jump_height, ForceMode.Impulse);
+            }
         }
 
         if (getMemo[0] && getMemo[1] && getMemo[2] && getMemo[3] && getMemo[4])
@@ -129,119 +137,119 @@ public class player_control : MonoBehaviour
             Invoke("Speak1", 3.0f);
             //getIndex(1);
         }
-        else if (isSpeaking[1])
+        if (isSpeaking[1])
         {
             speak[1].SetActive(true);
             isSpeaking[1] = false;
             Invoke("Speak2", 3.0f);
             //getIndex(2);
         }
-        else if (isSpeaking[2])
+        if (isSpeaking[2])
         {
             speak[2].SetActive(true);
             isSpeaking[2] = false;
             Invoke("Speak3", 3.0f);
             //getIndex(3);
         }
-        else if (isSpeaking[3] && isGetMemo1)
+        if (isSpeaking[3] && isGetMemo1)
         {
             speak[3].SetActive(true);
             isSpeaking[3] = false;
             Invoke("Speak4", 3.0f);
         }
-        else if (isSpeaking[4])
+        if (isSpeaking[4])
         {
             speak[4].SetActive(true);
             isSpeaking[4] = false;
             Invoke("Speak5", 5.0f);
         }
-        else if (isSpeaking[5])
+        if (isSpeaking[5])
         {
             speak[5].SetActive(true);
             isSpeaking[5] = false;
             Invoke("Speak6", 3.0f);
         }
-        else if (isSpeaking[6] && isSuccessGetMemo1 && isSuccessGetMemo2)
+        if (isSpeaking[6] && isSuccessGetMemo1 && isSuccessGetMemo2)
         {
             speak[6].SetActive(true);
             isSpeaking[6] = false;
             Invoke("Speak7", 5.0f);
         }
-        else if (isSpeaking[7])
+        if (isSpeaking[7])
         {
             speak[7].SetActive(true);
             isSpeaking[7] = false;
             Invoke("Speak8", 4.0f);
         }
-        else if (isSpeaking[8])
+        if (isSpeaking[8])
         {
             speak[8].SetActive(true);
             isSpeaking[8] = false;
             Invoke("Speak9", 5.0f);
         }
-        else if (isSpeaking[9])
+        if (isSpeaking[9])
         {
             speak[9].SetActive(true);
             isSpeaking[9] = false;
             Invoke("Speak10", 5.0f);
         }
-        else if (isSpeaking[10] && isFindCarKey)
+        if (isSpeaking[10] && isFindCarKey)
         {
             speak[10].SetActive(true);
             isSpeaking[10] = false;
             Invoke("Speak11", 5.0f);
         }
 
-        else if (isSpeaking[11] && isInCar)
+        if (isSpeaking[11] && isInCar)
         {
             speak[11].SetActive(true);
             isInCarSpeak = true;
             isSpeaking[11] = false;
             Invoke("Speak12", 3.0f);
         }
-        else if (isSpeaking[12] && isOutCar && carCrash)
+        if (isSpeaking[12] && isOutCar && carCrash)
         {
             speak[12].SetActive(true);
             isSpeaking[12] = false;
             Invoke("Speak13", 3.0f);
         }
-        else if (isSpeaking[13])
+        if (isSpeaking[13])
         {
             speak[13].SetActive(true);
             isSpeaking[13] = false;
             Invoke("Speak14", 3.0f);
         }
-        else if (isSpeaking[14])
+        if (isSpeaking[14])
         {
             speak[14].SetActive(true);
             isSpeaking[14] = false;
             Invoke("Speak15", 5.0f);
         }
-        else if (isSpeaking[15])
+        if (isSpeaking[15])
         {
             speak[15].SetActive(true);
             isSpeaking[15] = false;
             Invoke("Speak16", 3.0f);
         }
-        else if (isSpeaking[16])
+        if (isSpeaking[16])
         {
             speak[16].SetActive(true);
             isSpeaking[16] = false;
             Invoke("Speak17", 3.0f);
         }
-        else if (isSpeaking[17] && isFindHellKey)
+        if (isSpeaking[17] && isFindHellKey)
         {
             speak[17].SetActive(true);
             isSpeaking[17] = false;
             Invoke("Speak18", 3.0f);
         }
-        else if (isSpeaking[18] && isInHell)
+        if (isSpeaking[18] && isInHell)
         {
             speak[18].SetActive(true);
             isSpeaking[18] = false;
             Invoke("Speak19", 10.0f);
         }
-        else if (isSpeaking[19])
+        if (isSpeaking[19])
         {
             speak[19].SetActive(true);
             isSpeaking[19] = false;
@@ -251,13 +259,15 @@ public class player_control : MonoBehaviour
         // 만약 노이즈 화면과 게임화면의 출력이 정상적으로 전환되지 않고
         // 노이즈 화면만 지속적으로 보일 때
         // 여기부터
-        if (cube_collider.see_slender == true)
+        if (cube_collider.see_slender)
         {
+            //Invoke("showNoiseCamera", 1.0f);
             showNoiseCamera();
             cube_collider.see_slender = false;
         }
         else
         {
+            //Invoke("showMainCamera", 2.0f);
             showMainCamera();
         }
         // 여기까지 주석처리하면 됩니다. (노이즈 화면 제거)
@@ -402,15 +412,27 @@ public class player_control : MonoBehaviour
         speak[19].SetActive(false);
     }
 
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "floor")
+        {
+            isJump = false;
+        }
+    }
+
     void showNoiseCamera()
     {
         mainCamera.enabled = false;
         noiseCamera.enabled = true;
+        /*mainCamera.gameObject.SetActive(false);
+        noiseCamera.gameObject.SetActive(true);*/
     }
 
     void showMainCamera()
     {
         mainCamera.enabled = true;
         noiseCamera.enabled = false;
+        /*mainCamera.gameObject.SetActive(true);
+        noiseCamera.gameObject.SetActive(false);*/
     }
 }

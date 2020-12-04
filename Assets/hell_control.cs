@@ -25,13 +25,12 @@ public class hell_control : MonoBehaviour
         startSceneTime += Time.deltaTime;
         if (startSceneTime > 5.0f)
         {
-            //SceneManager.LoadScene("ending_scene");
             audioSource.Play();
         }
 
         if (startSceneTime > 10.0f)
         {
-            //SceneManager.LoadScene("ending_scene");
+            SceneManager.LoadScene("ending_scene");
         }
     }
 

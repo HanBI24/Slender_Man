@@ -35,7 +35,7 @@ public class get_memo : MonoBehaviour
     public GameObject slenderControl;
     public GameObject hellControl;
     public GameObject hellControlCamera;
-    public GameObject leftLightControl, rightLightControl;
+    public GameObject hellLeftLightControl, hellRightLightControl;
 
     public static bool[] isGetMemoSpeed;
 
@@ -66,8 +66,8 @@ public class get_memo : MonoBehaviour
         slenderControl.GetComponent<slender_control>().enabled = false;
         hellControl.GetComponent<hell_control>().enabled = false;
         hellControlCamera.GetComponent<hell_control>().enabled = false;
-        leftLightControl.GetComponent<hell_control>().enabled = false;
-        rightLightControl.GetComponent<hell_control>().enabled = false;
+        hellLeftLightControl.SetActive(false);
+        hellRightLightControl.SetActive(false);
     }
 
     // Update is called once per frame
@@ -93,7 +93,6 @@ public class get_memo : MonoBehaviour
                         Destroy(memo[0]);
                         isGet[0] = true;
                         slenderControl.GetComponent<slender_control>().enabled = true;
-
                     }
                     if (hit.transform.gameObject.name == "memo2")
                     {
@@ -142,8 +141,8 @@ public class get_memo : MonoBehaviour
 
                         hellControl.GetComponent<hell_control>().enabled = true;
                         hellControlCamera.GetComponent<hell_control>().enabled = true;
-                        leftLightControl.GetComponent<hell_control>().enabled = true;
-                        rightLightControl.GetComponent<hell_control>().enabled = true;
+                        hellLeftLightControl.SetActive(true);
+                        hellRightLightControl.SetActive(true);
 
                         leftLight.gameObject.SetActive(true);
                         rightLight.gameObject.SetActive(true);

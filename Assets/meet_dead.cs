@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class meet_dead : MonoBehaviour
 {
@@ -18,9 +19,10 @@ public class meet_dead : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.name == "Player")
+        if (other.gameObject.name == "Player" && !get_car.isInCar)
         {
             //Debug.Log("dead");
+            SceneManager.LoadScene("ending_scene");
         }
     }
 }

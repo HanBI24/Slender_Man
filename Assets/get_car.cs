@@ -12,6 +12,9 @@ public class get_car : MonoBehaviour
     public GameObject player;
     public GameObject leftLight, rightLight;
 
+    public GameObject meetDeadScript;
+    public static bool isInCar = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +31,8 @@ public class get_car : MonoBehaviour
             player_control.isOutCar = false;
             leftLight.gameObject.SetActive(true);
             rightLight.gameObject.SetActive(true);
+            isInCar = true;
+            meetDeadScript.GetComponent<meet_dead>().enabled = false;
             if (crash_door.hit_car)
             {
                 player_control.isCarKey = false;
@@ -51,6 +56,8 @@ public class get_car : MonoBehaviour
             playerControlScript.GetComponent<player_control>().enabled = true;
             player_camera.gameObject.SetActive(true);
             car_camera.gameObject.SetActive(false);
+            meetDeadScript.GetComponent<meet_dead>().enabled = true;
+            isInCar = false;
 
             GameObject player_spawn_point = GameObject.Find("player_spawn");
             //Instantiate(player, player_spawn_point.transform.position, player_spawn_point.transform.rotation);
