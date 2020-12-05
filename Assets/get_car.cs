@@ -14,6 +14,7 @@ public class get_car : MonoBehaviour
 
     public GameObject meetDeadScript;
     public static bool isInCar = false;
+    public GameObject handLight;
 
     // Start is called before the first frame update
     void Start()
@@ -45,6 +46,7 @@ public class get_car : MonoBehaviour
                 player_control.in_car = false;
                 player_camera.gameObject.SetActive(false);
                 car_camera.gameObject.SetActive(true);
+                handLight.SetActive(false);
             }
             
         }
@@ -54,8 +56,11 @@ public class get_car : MonoBehaviour
             player_control.isOutCar = true;
             carControlScript.GetComponent<UnityStandardAssets.Vehicles.Car.CarUserControl>().enabled = false;
             playerControlScript.GetComponent<player_control>().enabled = true;
+
             player_camera.gameObject.SetActive(true);
             car_camera.gameObject.SetActive(false);
+            handLight.SetActive(true);
+
             meetDeadScript.GetComponent<meet_dead>().enabled = true;
             isInCar = false;
 

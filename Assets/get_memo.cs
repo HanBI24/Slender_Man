@@ -152,7 +152,6 @@ public class get_memo : MonoBehaviour
 
                         player_control.isInHell = true;
 
-                        SceneManager.LoadScene("ending_scene", LoadSceneMode.Additive);
                         mainCamera.gameObject.SetActive(false);
                         endingCamera.gameObject.SetActive(true);
 
