@@ -7,10 +7,7 @@ public class player_control : MonoBehaviour
     private float player_walking_speed = 10.0f;
     private float player_running_speed = 10.0f;
     private float player_rotation_speed = 120.0f;
-
     private float player_jump_height = 8.0f;
-    private float player_max_jump_height = 10.0f;
-    private float player_jump_power = 1.0f;
 
     public static bool in_car = false;
 
@@ -39,8 +36,6 @@ public class player_control : MonoBehaviour
 
     public static bool isInCarSpeak = false;
 
-    int jumpCnt = 0;
-    float jumpTime = 0.0f;
     bool isJump = false;
 
 
@@ -70,7 +65,6 @@ public class player_control : MonoBehaviour
         float distance_per_frame_walk = player_walking_speed * Time.deltaTime;
         float distance_per_frame_run = player_running_speed * Time.deltaTime;
         float degree_per_frame = player_rotation_speed * Time.deltaTime;
-        float running_time_check = 0.0f;
 
         float moving_velocity = Input.GetAxis("Vertical");
         float player_angle = Input.GetAxis("Horizontal");

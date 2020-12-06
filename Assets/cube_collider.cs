@@ -8,6 +8,7 @@ public class cube_collider : MonoBehaviour
     public GameObject main_camera;
     private AudioSource audioSource;
     public AudioClip appear_sound;
+
     // Start is called before the first frame update
     void Start()
     {
