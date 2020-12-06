@@ -1049,12 +1049,12 @@ Camera:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_RenderingPath: -1
+  m_RenderingPath: 3
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
-  m_AllowMSAA: 1
+  m_AllowMSAA: 0
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
@@ -1272,12 +1272,12 @@ Camera:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_RenderingPath: -1
+  m_RenderingPath: 3
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
-  m_AllowMSAA: 1
+  m_AllowMSAA: 0
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
@@ -9885,9 +9885,9 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 0.9430433, g: 0.9433962, b: 0.5918476, a: 1}
-  m_Intensity: 5
-  m_Range: 108
-  m_SpotAngle: 67.6
+  m_Intensity: 3
+  m_Range: 52
+  m_SpotAngle: 54.02
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
@@ -11707,8 +11707,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1440543487}
-  m_LocalRotation: {x: -0.15758336, y: -0.8383237, z: -0.41005394, w: 0.32285705}
-  m_LocalPosition: {x: 97.10086, y: -521.75446, z: -90.95529}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -456.54395, y: -74.23635, z: -299.18484}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 293744389}

@@ -45,12 +45,12 @@ public class Light_On_Off : MonoBehaviour
         if (Input.GetKeyDown("g"))
         {
             light.range += 10.0f;
-            light.intensity += 10.0f;
+            light.intensity += 3.0f;
             
-            if(light.range > 118.0f && light.intensity > 15.0f)
+            if(light.range > 62.0f && light.intensity > 5.0f)
             {
-                light.range = 108.0f;
-                light.intensity = 5.0f;
+                light.range = 52.0f;
+                light.intensity = 3.0f;
             }
         }
         
