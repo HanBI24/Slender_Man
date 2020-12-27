@@ -5,6 +5,17 @@
 1. Download **"BuildGame"** folder.
 2. Execute **"Slender Man.exe"** file.
 
+## **How To Control**
+**Arrow keys**: Move  
+**Ctrl**: Dash  
+**R**: Flashlight up  
+**F**: Flashlight down  
+**G**: More light  
+**E**: Off flashlight  
+**I**: In car  
+**O**: Out car  
+**Mouse left key**: Get memo, in helicopter    
+
 ## **License**  
 ```
 MIT License
